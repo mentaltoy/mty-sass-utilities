@@ -1,3 +1,5 @@
+*.map
 /.idea/
 *.iml
 /node_modules/
+.sass-cache/
