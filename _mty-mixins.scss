@@ -1,4 +1,4 @@
-// Mentaltoy - Mixins
+// Fenix - Mixins 
 
 
 @mixin fx-anchor-plain{
@@ -137,6 +137,48 @@
   -ms-border-radius: $radius;
   border-radius: $radius;
 }
+
+
+@mixin fx-no-border{
+  border-top: none;
+  border-right: none;
+  border-bottom: none;
+  border-left: none;
+
+  border: none;
+}
+
+
+@mixin fx-no-border-radius{
+  -moz-border-radius-topleft: 0;
+  -webkit-border-top-left-radius: 0;
+  border-top-left-radius: 0;
+
+  -moz-border-radius-topright: 0;
+  -webkit-border-top-right-radius: 0;
+  border-top-right-radius: 0;
+
+  -moz-border-radius-bottomright: 0;
+  -webkit-border-bottom-right-radius: 0;
+  border-bottom-right-radius:0;
+
+  -moz-border-radius-bottomleft: 0;
+  -webkit-border-bottom-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  border-radius: 0;
+
+
+}
+
+
+
+
+
 
 @mixin fx-box-shadow($top, $left, $blur, $color, $inset: false) {
   @if $inset {
@@ -307,7 +349,7 @@
 @mixin fx-small-icons($locX:0,$locY:0){
   height: 15px;
   width: 15px;
-  background: url("img/fenix-catalog-sprite-small.svg") no-repeat $locX $locY;
+  background: url("#{$fx-ui-common}css/img/fenix-catalog-sprite-small.svg") no-repeat $locX $locY;
   background-size: 150px 30px;
 }
 
@@ -324,3 +366,36 @@
     @include fx-transfor-me(translate(0, -50%));
 }
 
+
+
+// Aspect Ratio
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+
+@mixin truncate-multi($font-size,$line-height,$lines-to-show) {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  width: 100%;
+  height: $font-size*$line-height*$lines-to-show; /* Fallback for non-webkit */
+  font-size: $font-size;
+  line-height: $line-height;
+  -webkit-line-clamp: $lines-to-show;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
